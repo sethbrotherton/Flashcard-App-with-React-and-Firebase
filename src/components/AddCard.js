@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebase from "../config/Firebase";
+import { db } from "../config/Firebase";
 
 export default class AddCard extends Component {
   state = {
@@ -16,7 +16,7 @@ export default class AddCard extends Component {
 
   addCard = e => {
     e.preventDefault();
-    const db = firebase.firestore();
+    //const db = firebase.firestore();
     db.settings({
       timestampsInSnapshots: true
     });
@@ -24,6 +24,7 @@ export default class AddCard extends Component {
       front: this.state.front,
       back: this.state.back
     });
+    console.log(cardRef);
     this.setState({
       front: "",
       back: ""
