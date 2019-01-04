@@ -10,7 +10,7 @@ class App extends Component {
     cards: []
   };
 
-  componentWillMount() {
+  updateCards = () => {
     let cards = [];
     db.collection("testing")
       .get()
@@ -28,17 +28,25 @@ class App extends Component {
       .catch(e => {
         console.log(e);
       });
+  };
+
+  componentWillMount() {
+    this.updateCards();
+  }
+
+  componentWillUpdate() {
+    this.updateCards();
   }
 
   render() {
     return (
       <div className="App">
         <h2>React Flashcards - Under Construction</h2>
-        {this.state.cards.map(card => {
+        {/* {this.state.cards.map(card => {
           return <Cards>{card.front}</Cards>;
-        })}
-        {/* <Cards /> */}
+        })} */}
         <AddCard />
+        <Cards cards={this.state.cards} />
       </div>
     );
   }
