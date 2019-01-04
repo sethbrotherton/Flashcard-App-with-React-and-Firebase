@@ -9,7 +9,7 @@ function Cards(props) {
     minWidth: "25%",
     display: "inline-block"
   };
-  console.log(props);
+  //console.log(props);
   return (
     <div>
       {props.cards.map((card, index) => {
@@ -17,6 +17,7 @@ function Cards(props) {
           <div key={index} style={cardStyle}>
             <p>{card.front}</p>
             <p>{card.back}</p>
+            <button onClick={() => props.deleteCard(card.id)}>Delete</button>
           </div>
         );
       })}

@@ -10,33 +10,82 @@ class App extends Component {
     cards: []
   };
 
-  updateCards = () => {
-    let cards = [];
-    db.collection("testing")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          cards.push(doc.data());
-        });
-        return cards;
-      })
-      .then(() => {
-        this.setState({
-          cards
-        });
-      })
-      .catch(e => {
-        console.log(e);
+  // updateCards = () => {
+  //   let cards = [];
+  //   db.collection("testing")
+  //     .get()
+  //     .then(querySnapshot => {
+  //       console.log("id:", this.state.cards);
+  //       querySnapshot.forEach(doc => {
+  //         cards.push(doc.data(), doc.id);
+  //       });
+  //       return cards;
+  //     })
+  //     .then(() => {
+  //       this.setState({
+  //         cards
+  //       });
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //     });
+  // };
+
+  syncCards = () => {
+    db.collection("testing").onSnapshot(res => {
+      this.setState({
+        cards: []
       });
+      res.docChanges().forEach(change => {
+        const doc = { ...change.doc.data(), id: change.doc.id };
+        switch (change.type) {
+          case "added":
+            let cards = [...this.state.cards, doc];
+            this.setState({
+              cards: cards
+            });
+            //console.log(this.state.cards);
+            break;
+          // case "modified":
+          //   const index = data.findIndex(item => item.id == doc.id);
+          //   data[index] = doc;
+          //   break;
+          // case "removed":
+          //   data = data.filter(item => item.id !== doc.id);
+          //   break;
+          default:
+            break;
+        }
+      });
+    });
+  };
+
+  deleteCard = id => {
+    console.log("deleting");
+    const copy = [...this.state.cards];
+    const filteredCards = copy.filter(card => {
+      return card.id !== id;
+    });
+    console.log(filteredCards);
+    this.setState({
+      cards: filteredCards
+    });
+    db.collection("testing")
+      .doc(id)
+      .delete();
+    this.syncCards();
   };
 
   componentWillMount() {
-    this.updateCards();
+    this.syncCards();
   }
 
-  componentWillUpdate() {
-    this.updateCards();
-  }
+  // componentWillUpdate(nextProps, nextState) {
+  //   if (this.state !== nextState) {
+  //     console.log(nextState);
+  //     console.log(this.state);
+  //   }
+  // }
 
   render() {
     return (
@@ -45,8 +94,8 @@ class App extends Component {
         {/* {this.state.cards.map(card => {
           return <Cards>{card.front}</Cards>;
         })} */}
-        <AddCard />
-        <Cards cards={this.state.cards} />
+        <AddCard syncCards={this.syncCards} />
+        <Cards cards={this.state.cards} deleteCard={this.deleteCard} />
       </div>
     );
   }

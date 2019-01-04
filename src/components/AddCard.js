@@ -11,7 +11,7 @@ export default class AddCard extends Component {
     this.setState({
       [e.target.id]: e.target.value
     });
-    console.log(this.state);
+    //console.log(this.state);
   };
 
   addCard = e => {
@@ -24,11 +24,17 @@ export default class AddCard extends Component {
       front: this.state.front,
       back: this.state.back
     });
-    console.log(cardRef);
+    //console.log(cardRef);
     this.setState({
       front: "",
       back: ""
     });
+    this.props.syncCards();
+    this.frontInputFocus();
+  };
+
+  frontInputFocus = () => {
+    document.querySelector("#front").focus();
   };
 
   render() {
