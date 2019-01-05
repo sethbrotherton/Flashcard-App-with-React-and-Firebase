@@ -14,10 +14,21 @@ function Cards(props) {
     <div>
       {props.cards.map((card, index) => {
         return (
-          <div key={index} style={cardStyle}>
-            <p>{card.front}</p>
-            <p>{card.back}</p>
-            <button onClick={() => props.deleteCard(card.id)}>Delete</button>
+          <div className="flip-card" key={card.id} style={cardStyle}>
+            <div className="flip-card-inner">
+              <div className="flip-card-front">
+                <p>{card.front}</p>
+              </div>
+              <div className="flip-card-back">
+                <p>{card.back}</p>
+              </div>
+            </div>
+            <button
+              className="delete-button"
+              onClick={() => props.deleteCard(card.id)}
+            >
+              Delete
+            </button>
           </div>
         );
       })}

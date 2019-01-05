@@ -1,32 +1,98 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+div p {
+  padding: 1rem;
+}
+
+.delete-button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  background-color: rgb(172, 11, 11);
+  color: white;
+  border-radius: 5px;
+  border: 3px solid red;
+  transition: all 0.4s ease-in;
+}
+
+.delete-button:hover {
+  transform: scale(1.2);
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-right: 0.5rem;
+}
+.add-button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: all 0.5s ease-in;
+}
+.add-button:hover {
+  background-color: aqua;
+  color: white;
+}
+
+.flip-card {
+  background-color: lightblue;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  border-radius: 8px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: scroll;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: rgb(140, 169, 201);
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
 }

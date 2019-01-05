@@ -50,9 +50,13 @@ class App extends Component {
           //   const index = data.findIndex(item => item.id == doc.id);
           //   data[index] = doc;
           //   break;
-          // case "removed":
-          //   data = data.filter(item => item.id !== doc.id);
-          //   break;
+          case "removed":
+            const copy = [...this.state.cards];
+            let filteredCards = copy.filter(card => card.id !== doc.id);
+            this.setState({
+              cards: filteredCards
+            });
+            break;
           default:
             break;
         }

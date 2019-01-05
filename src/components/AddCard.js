@@ -20,17 +20,19 @@ export default class AddCard extends Component {
     db.settings({
       timestampsInSnapshots: true
     });
-    const cardRef = db.collection("testing").add({
-      front: this.state.front,
-      back: this.state.back
-    });
-    //console.log(cardRef);
-    this.setState({
-      front: "",
-      back: ""
-    });
-    this.props.syncCards();
-    this.frontInputFocus();
+    if (this.state.front.length && this.state.back.length) {
+      db.collection("testing").add({
+        front: this.state.front,
+        back: this.state.back
+      });
+      //console.log(cardRef);
+      this.setState({
+        front: "",
+        back: ""
+      });
+      this.props.syncCards();
+      this.frontInputFocus();
+    }
   };
 
   frontInputFocus = () => {
@@ -57,7 +59,9 @@ export default class AddCard extends Component {
             onChange={this.handleChange}
             value={this.state.back}
           />
-          <button type="submit">Submit</button>
+          <button className="add-button" type="submit">
+            ADD CARD
+          </button>
         </form>
       </div>
     );
