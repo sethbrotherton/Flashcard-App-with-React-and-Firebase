@@ -21,7 +21,7 @@ export default class AddCard extends Component {
       timestampsInSnapshots: true
     });
     if (this.state.front.length && this.state.back.length) {
-      db.collection("testing").add({
+      db.collection(this.props.deck).add({
         front: this.state.front,
         back: this.state.back
       });

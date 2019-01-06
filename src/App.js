@@ -2,12 +2,16 @@ import React, { Component } from "react";
 import "./App.css";
 import Cards from "./components/Cards";
 import AddCard from "./components/AddCard";
-import firebase from "firebase";
+import Deck from "./components/Deck";
+import firebase from "firebase/app";
+//import firebase from "firebase/firestore";
+import "firebase/firestore";
 import { db } from "./config/Firebase";
 
 class App extends Component {
   state = {
-    cards: []
+    cards: [],
+    deck: "default"
   };
 
   // updateCards = () => {
@@ -32,7 +36,8 @@ class App extends Component {
   // };
 
   syncCards = () => {
-    db.collection("testing").onSnapshot(res => {
+    let deckName = this.state.deck;
+    db.collection(deckName).onSnapshot(res => {
       this.setState({
         cards: []
       });
@@ -74,31 +79,46 @@ class App extends Component {
     this.setState({
       cards: filteredCards
     });
-    db.collection("testing")
+    db.collection(this.state.deck)
       .doc(id)
       .delete();
     this.syncCards();
+  };
+
+  switchDeck = deckName => {
+    console.log("starting", this.state.deck);
+    // this.setState({
+    //   deck: deckName
+    // });
+    this.setState(
+      state => {
+        const deck = deckName;
+        return {
+          deck
+        };
+      },
+      () => {
+        this.syncCards();
+      }
+    );
+    console.log("finishing", this.state.deck);
   };
 
   componentWillMount() {
     this.syncCards();
   }
 
-  // componentWillUpdate(nextProps, nextState) {
-  //   if (this.state !== nextState) {
-  //     console.log(nextState);
-  //     console.log(this.state);
-  //   }
-  // }
+  componentWillUnmount() {
+    const ref = firebase.firestore().ref();
+    ref.off();
+  }
 
   render() {
     return (
       <div className="App">
         <h2>React Flashcards - Under Construction</h2>
-        {/* {this.state.cards.map(card => {
-          return <Cards>{card.front}</Cards>;
-        })} */}
-        <AddCard syncCards={this.syncCards} />
+        <Deck deck={this.state.deck} switchDeck={this.switchDeck} />
+        <AddCard deck={this.state.deck} syncCards={this.syncCards} />
         <Cards cards={this.state.cards} deleteCard={this.deleteCard} />
       </div>
     );
