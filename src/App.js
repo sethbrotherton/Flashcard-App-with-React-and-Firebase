@@ -11,7 +11,8 @@ import { db } from "./config/Firebase";
 class App extends Component {
   state = {
     cards: [],
-    deck: "default"
+    deck: "default",
+    isFlipped: false
   };
 
   // updateCards = () => {
@@ -70,12 +71,10 @@ class App extends Component {
   };
 
   deleteCard = id => {
-    console.log("deleting");
     const copy = [...this.state.cards];
     const filteredCards = copy.filter(card => {
       return card.id !== id;
     });
-    console.log(filteredCards);
     this.setState({
       cards: filteredCards
     });
@@ -86,10 +85,6 @@ class App extends Component {
   };
 
   switchDeck = deckName => {
-    console.log("starting", this.state.deck);
-    // this.setState({
-    //   deck: deckName
-    // });
     this.setState(
       state => {
         const deck = deckName;
@@ -101,7 +96,14 @@ class App extends Component {
         this.syncCards();
       }
     );
-    console.log("finishing", this.state.deck);
+  };
+
+  flipThisCard = () => {
+    const copy = this.state.isFlipped;
+    const toggled = !copy;
+    this.setState({
+      isFlipped: toggled
+    });
   };
 
   componentWillMount() {
@@ -109,8 +111,8 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    const ref = firebase.firestore().ref();
-    ref.off();
+    // const ref = firebase.firestore();
+    // ref.off();
   }
 
   render() {
@@ -119,7 +121,12 @@ class App extends Component {
         <h2>React Flashcards - Under Construction</h2>
         <Deck deck={this.state.deck} switchDeck={this.switchDeck} />
         <AddCard deck={this.state.deck} syncCards={this.syncCards} />
-        <Cards cards={this.state.cards} deleteCard={this.deleteCard} />
+        <Cards
+          cards={this.state.cards}
+          deleteCard={this.deleteCard}
+          flipThisCard={this.flipThisCard}
+          isFlipped={this.state.isFlipped}
+        />
       </div>
     );
   }

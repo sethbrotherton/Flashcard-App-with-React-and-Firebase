@@ -35,8 +35,10 @@ export default class AddCard extends Component {
     }
   };
 
+  frontInputRef = React.createRef();
+
   frontInputFocus = () => {
-    document.querySelector("#front").focus();
+    this.frontInputRef.current.focus();
   };
 
   render() {
@@ -44,6 +46,7 @@ export default class AddCard extends Component {
       <div>
         <form onSubmit={this.addCard} action="">
           <input
+            ref={this.frontInputRef}
             type="text"
             name="front"
             id="front"
