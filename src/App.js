@@ -96,7 +96,10 @@ class App extends Component {
         this.syncCards();
       }
     );
+    this.cardsRef.current.resetTally();
   };
+
+  cardsRef = React.createRef();
 
   flipThisCard = () => {
     const copy = this.state.isFlipped;
@@ -122,6 +125,7 @@ class App extends Component {
         <Deck deck={this.state.deck} switchDeck={this.switchDeck} />
         <AddCard deck={this.state.deck} syncCards={this.syncCards} />
         <Cards
+          ref={this.cardsRef}
           cards={this.state.cards}
           deleteCard={this.deleteCard}
           flipThisCard={this.flipThisCard}

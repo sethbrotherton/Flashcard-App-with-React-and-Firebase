@@ -6,12 +6,21 @@ class Deck extends Component {
       <div>
         <h1>Choose a Deck!</h1>
 
-        <button id="testing" onClick={e => this.props.switchDeck(e.target.id)}>
-          testing
+        <button id="react" onClick={e => this.props.switchDeck(e.target.id)}>
+          React.js
         </button>
 
-        <button id="second" onClick={e => this.props.switchDeck(e.target.id)}>
-          second
+        <button id="java" onClick={e => this.props.switchDeck(e.target.id)}>
+          Java
+        </button>
+        <button id="science" onClick={e => this.props.switchDeck(e.target.id)}>
+          Science
+        </button>
+        <button
+          id="scripture"
+          onClick={e => this.props.switchDeck(e.target.id)}
+        >
+          Scripture
         </button>
       </div>
     );
