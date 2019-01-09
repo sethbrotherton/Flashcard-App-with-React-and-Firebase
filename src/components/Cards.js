@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Card from "./Card";
+import Deck from "./Deck";
+import AddCard from "./AddCard";
 
 class Cards extends Component {
   cardStyle = {
@@ -35,6 +37,8 @@ class Cards extends Component {
   render() {
     return (
       <div>
+        <Deck deck={this.props.deck} switchDeck={this.props.switchDeck} />
+        <AddCard deck={this.props.deck} syncCards={this.props.syncCards} />
         <h3>
           {this.state.numberCorrect}/{this.props.cards.length} Correct
         </h3>

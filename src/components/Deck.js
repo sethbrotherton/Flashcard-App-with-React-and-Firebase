@@ -13,6 +13,12 @@ class Deck extends Component {
         <button id="java" onClick={e => this.props.switchDeck(e.target.id)}>
           Java
         </button>
+        <button
+          id="developer-tools"
+          onClick={e => this.props.switchDeck(e.target.id)}
+        >
+          Developer Tools
+        </button>
         <button id="science" onClick={e => this.props.switchDeck(e.target.id)}>
           Science
         </button>
