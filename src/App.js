@@ -2,9 +2,12 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import Cards from "./components/Cards";
+import Home from "./components/Home";
+//import Cards from "./components/Cards";
+import About from "./components/About";
 import "firebase/firestore";
 import { db } from "./config/Firebase";
+const Cards = React.lazy(() => import("./components/Cards"));
 
 class App extends Component {
   state = {
@@ -96,24 +99,27 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <h2>React Flashcards - Under Construction</h2>
           <Navbar />
           <Switch>
+            <Route exact path="/" component={Home} />
             <Route
               path="/practice"
               render={() => (
-                <Cards
-                  ref={this.cardsRef}
-                  cards={this.state.cards}
-                  deleteCard={this.deleteCard}
-                  flipThisCard={this.flipThisCard}
-                  isFlipped={this.state.isFlipped}
-                  deck={this.state.deck}
-                  switchDeck={this.switchDeck}
-                  syncCards={this.syncCards}
-                />
+                <React.Suspense fallback={<div>Loading...</div>}>
+                  <Cards
+                    ref={this.cardsRef}
+                    cards={this.state.cards}
+                    deleteCard={this.deleteCard}
+                    flipThisCard={this.flipThisCard}
+                    isFlipped={this.state.isFlipped}
+                    deck={this.state.deck}
+                    switchDeck={this.switchDeck}
+                    syncCards={this.syncCards}
+                  />
+                </React.Suspense>
               )}
             />
+            <Route path="/about" component={About} />
           </Switch>
         </div>
       </BrowserRouter>

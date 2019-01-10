@@ -12,6 +12,10 @@
   color: #61dafb;
 }
 
+.selected {
+  color: green;
+}
+
 div p {
   padding: 1rem;
 }

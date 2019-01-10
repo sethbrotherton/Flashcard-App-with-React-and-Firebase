@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Card from "./Card";
 import Deck from "./Deck";
 import AddCard from "./AddCard";
+import PracticeAgain from "./PracticeAgain";
 
 class Cards extends Component {
   cardStyle = {
@@ -42,6 +43,12 @@ class Cards extends Component {
         <h3>
           {this.state.numberCorrect}/{this.props.cards.length} Correct
         </h3>
+        {this.state.numberCorrect === this.props.cards.length ? (
+          <PracticeAgain
+            deck={this.props.deck}
+            switchDeck={this.props.switchDeck}
+          />
+        ) : null}
         {this.props.cards.length ? (
           this.props.cards.map((card, index) => {
             return (
