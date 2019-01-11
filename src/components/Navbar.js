@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav>
       <div>
-        <h2>React Flashcards - Under Construction</h2>
+        <h2>React and Firestore Flashcards App</h2>
         <NavLink exact to="/" activeClassName="selected">
           Home
         </NavLink>

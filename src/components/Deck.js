@@ -9,13 +9,13 @@ class Deck extends Component {
         <button id="react" onClick={e => this.props.switchDeck(e.target.id)}>
           React
         </button>
-        <button id="react" onClick={e => this.props.switchDeck(e.target.id)}>
+        <button id="vue" onClick={e => this.props.switchDeck(e.target.id)}>
           Vue
         </button>
-        <button id="react" onClick={e => this.props.switchDeck(e.target.id)}>
+        <button id="angular" onClick={e => this.props.switchDeck(e.target.id)}>
           Angular
         </button>
-        <button id="java" onClick={e => this.props.switchDeck(e.target.id)}>
+        <button id="scala" onClick={e => this.props.switchDeck(e.target.id)}>
           Scala
         </button>
         <button
@@ -27,7 +27,7 @@ class Deck extends Component {
         <button id="science" onClick={e => this.props.switchDeck(e.target.id)}>
           Science
         </button>
-        <button id="science" onClick={e => this.props.switchDeck(e.target.id)}>
+        <button id="math" onClick={e => this.props.switchDeck(e.target.id)}>
           Math
         </button>
         <button
