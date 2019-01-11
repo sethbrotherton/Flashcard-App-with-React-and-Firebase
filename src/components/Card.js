@@ -17,7 +17,6 @@ class Card extends Component {
       wasRemembered: true
     });
     this.props.tallyCorrect();
-    console.log("remembered");
   };
   render() {
     return (

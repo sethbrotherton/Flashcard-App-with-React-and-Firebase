@@ -7,11 +7,16 @@ class Deck extends Component {
         <h1>Choose a Deck!</h1>
 
         <button id="react" onClick={e => this.props.switchDeck(e.target.id)}>
-          React.js
+          React
         </button>
-
+        <button id="react" onClick={e => this.props.switchDeck(e.target.id)}>
+          Vue
+        </button>
+        <button id="react" onClick={e => this.props.switchDeck(e.target.id)}>
+          Angular
+        </button>
         <button id="java" onClick={e => this.props.switchDeck(e.target.id)}>
-          Java
+          Scala
         </button>
         <button
           id="developer-tools"
@@ -21,6 +26,9 @@ class Deck extends Component {
         </button>
         <button id="science" onClick={e => this.props.switchDeck(e.target.id)}>
           Science
+        </button>
+        <button id="science" onClick={e => this.props.switchDeck(e.target.id)}>
+          Math
         </button>
         <button
           id="scripture"

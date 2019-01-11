@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.scss";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-//import Cards from "./components/Cards";
 import About from "./components/About";
 import "firebase/firestore";
 import { db } from "./config/Firebase";
@@ -30,7 +29,6 @@ class App extends Component {
             this.setState({
               cards: cards
             });
-            //console.log(this.state.cards);
             break;
           // case "modified":
           //   const index = data.findIndex(item => item.id == doc.id);
