@@ -5,15 +5,6 @@ import AddCard from "./AddCard";
 import PracticeAgain from "./PracticeAgain";
 
 class Cards extends Component {
-  cardStyle = {
-    border: "3px solid blue",
-    padding: "1rem",
-    fontSize: "24px",
-    margin: "1rem 1rem",
-    minWidth: "25%",
-    display: "inline-block"
-  };
-
   state = {
     numberCorrect: 0,
     switchDeckWasCalled: false
@@ -27,12 +18,10 @@ class Cards extends Component {
   };
 
   resetTally = () => {
-    //if (this.state.switchDeckWasCalled) {
     let newTotal = 0;
     this.setState({
       numberCorrect: newTotal
     });
-    // }
   };
 
   render() {
@@ -52,7 +41,7 @@ class Cards extends Component {
         {this.props.cards.length ? (
           this.props.cards.map((card, index) => {
             return (
-              <div className="flip-card" key={card.id} style={this.cardStyle}>
+              <div className="flip-card" key={card.id}>
                 <Card
                   tallyCorrect={this.tallyCorrect}
                   cardFront={card.front}

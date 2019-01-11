@@ -35,11 +35,14 @@ class Card extends Component {
               <p>{this.props.cardFront}</p>
             </div>
             <div className="flip-card-back">
-              <p>{this.props.cardBack}</p>
-              <button onClick={this.rememberedCorrectly}>
+              <button
+                className="card-button"
+                onClick={this.rememberedCorrectly}
+              >
                 Recalled correctly
               </button>
-              <button>Need more practice</button>
+              <button className="card-button">Need more practice</button>
+              <p>{this.props.cardBack}</p>
             </div>
           </div>
         ) : (
