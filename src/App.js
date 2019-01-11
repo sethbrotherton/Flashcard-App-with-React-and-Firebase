@@ -15,6 +15,8 @@ class App extends Component {
     isFlipped: false
   };
 
+  // This function will reach out to the firestore and sync
+  // state of this app with the data in the db
   syncCards = () => {
     let deckName = this.state.deck;
     db.collection(deckName).onSnapshot(res => {
@@ -62,6 +64,9 @@ class App extends Component {
     this.syncCards();
   };
 
+  // this function will change the name of the deckname in this.state
+  // the deckname is the parameter passed into syncCards(),
+  // so changing the deckname will change the collection asked for from the db
   switchDeck = deckName => {
     this.setState(
       state => {
@@ -74,11 +79,14 @@ class App extends Component {
         this.syncCards();
       }
     );
+    // when the deck is changed, the number correctly remembered is reset to 0 in the following line.
     this.cardsRef.current.resetTally();
   };
 
   cardsRef = React.createRef();
 
+  // toggles the state of the card, flipped or not.  Will affect conditional rendering of style, so that different sides
+  // will show based on boolean value of this state
   flipThisCard = () => {
     const copy = this.state.isFlipped;
     const toggled = !copy;
@@ -87,11 +95,10 @@ class App extends Component {
     });
   };
 
+  //Cards are loaded from db when component mounts
   componentWillMount() {
     this.syncCards();
   }
-
-  componentWillUnmount() {}
 
   render() {
     return (
