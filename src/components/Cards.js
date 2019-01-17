@@ -27,6 +27,8 @@ class Cards extends Component {
   render() {
     return (
       <div>
+        <h1>You are currently in the {this.props.deck} deck.</h1>
+        <h2>If you would like to change decks, choose from below...</h2>
         <Deck deck={this.props.deck} switchDeck={this.props.switchDeck} />
         <AddCard deck={this.props.deck} syncCards={this.props.syncCards} />
         <h3>

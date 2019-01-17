@@ -13,7 +13,7 @@ const Navbar = () => {
           Practice
         </NavLink>
         <NavLink to="/about" activeClassName="selected">
-          About this project
+          About
         </NavLink>
       </div>
     </nav>

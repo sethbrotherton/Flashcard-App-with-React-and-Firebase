@@ -11,7 +11,7 @@ const Cards = React.lazy(() => import("./components/Cards"));
 class App extends Component {
   state = {
     cards: [],
-    deck: "default",
+    deck: "react",
     isFlipped: false
   };
 
